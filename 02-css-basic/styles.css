@@ -1,0 +1,37 @@
+/* select element by Tag Name */
+/* h1 {
+        color: purple;
+        font-style: italic;
+      } */
+
+/* select element by ID */
+#profile {
+  color: purple;
+}
+
+/* select elemet by Class Name */
+.font-miring {
+  font-style: italic !important;
+}
+
+.font-tembal {
+  font-weight: bold;
+}
+
+/* Select element by Tag Name and chaining with class */
+li.bg-green {
+  background-color: green;
+}
+
+th.bg-green {
+  background-color: aquamarine;
+}
+
+ul li {
+  color: red;
+}
+
+.font-title {
+  font-style: normal;
+  text-transform: capitalize;
+}
