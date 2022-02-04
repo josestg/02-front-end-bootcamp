@@ -16,6 +16,8 @@ maximum = 20
 6. Ulangi dari step 3 sampai setiap angka berhasil dikunjungi.
 7. Proses selesai, bilangan terbesar ada di 'maximum'.
 
+Kompleksitas: Linear, O(n), karna harus ngecek semua bilangan yang ada.
+
 catatan: integer = bilangan bulat
 
 ```bash
