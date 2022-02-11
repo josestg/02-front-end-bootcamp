@@ -60,8 +60,21 @@ function showAlert() {
   userForm.classList.add("hide");
 
   // Kita ingin menampilkan user data.
-  const formattedMessage = `(${userName}) ${userComment}`;
-  dialogContent.textContent = formattedMessage;
+
+  // <h1> Name </h1>
+  // <p> Comment </p>
+
+  const h1 = document.createElement("h1");
+  h1.textContent = userName;
+
+  const p = document.createElement("p");
+  p.textContent = userComment;
+
+  //   const formattedMessage = `(${userName}) ${userComment}`;
+  //   dialogContent.textContent = formattedMessage;
+
+  dialogContent.appendChild(h1);
+  dialogContent.appendChild(p);
 }
 
 // Kebalikan dari fungsi `showAlert`.
