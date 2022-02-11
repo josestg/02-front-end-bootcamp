@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Belajar DOM Events</title>
+  </head>
+  <body id="body">
+    <div id="dialog" class="container hide">
+      <div class="cookiesContent" id="cookiesPopup">
+        <button class="close handle">✖</button>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/1047/1047711.png"
+          alt="cookies-img"
+        />
+        <p id="dialog-content">(Jose) Comment</p>
+        <button class="accept handle">OK</button>
+      </div>
+    </div>
+
+    <br />
+
+    <form id="form">
+      <label for="user-name">Name</label>
+      <input
+        id="user-name"
+        type="text"
+        name="nama"
+        placeholder="enter your name..."
+      />
+      <br />
+      <label for="user-comment">Comment</label>
+      <input
+        id="user-comment"
+        type="text"
+        name="komen"
+        placeholder="enter your comment..."
+      />
+      <br />
+      <input type="submit" id="submit-button" value="Submit!" />
+    </form>
+
+    <button id="alert-button" class="hide">Show Dialog!</button>
+
+    <script src="./events.js"></script>
+  </body>
+</html>
