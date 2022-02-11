@@ -10,14 +10,14 @@ const hideElementClassName = "hide";
 const unstartedClassName = "unstarted";
 const xPlayerSymbol = "X";
 const oPlayerSymbol = "O";
-const xPlayerHitPower = 3;
+const xPlayerHitPower = 1;
 const oPlayerHitPower = 4;
 
 let currentPlayer = xPlayerSymbol;
 
 function getWinnerByTotalScore(score) {
   switch (score) {
-    case 9:
+    case 3:
       return xPlayerSymbol;
     case 12:
       return oPlayerSymbol;
