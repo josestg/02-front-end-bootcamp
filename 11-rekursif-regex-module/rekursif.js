@@ -50,12 +50,12 @@ function decrement(n) {
 // [console.log(9)]
 // []
 
-decrement(10);
+// decrement(10);
 
 // fibonacci(0) = 0
 // fibonacci(1) = 1
 // fibonacci(n) = fibonacci(n-1) + fibonacci(n-2)
-function fibonacci(n) {
+export default function fibonacci(n) {
   // fibonacci(0);
   //   if (n === 0) {
   //     return 0;
@@ -73,4 +73,14 @@ function fibonacci(n) {
   return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-console.log(fibonacci(20));
+// console.log(fibonacci(20));
+
+export function iter() {
+  for (let i = 0; i < 10; i++) {
+    console.log("rekursif", i);
+  }
+}
+
+export const message = "Hello from rekursif.js";
+
+export { decrement as decrementRecursive };
