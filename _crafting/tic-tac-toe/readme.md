@@ -1,6 +1,6 @@
 # A Simple Tic Tac Toe Game
 
-![demo](./demo.mov)
+![demo](./demo.gif)
 
 ## Credits
 
