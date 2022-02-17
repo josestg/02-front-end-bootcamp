@@ -123,6 +123,8 @@ form.addEventListener("submit", (event) => {
   // mengubah form entries menjadi object biasa.
   const fd = new FormData(form);
   const data = Object.fromEntries(fd);
+  // untuk membersihkan input form, bisa menggunakna reset().
+  form.reset();
 
   // mengambil todo saat ini dari session
   //   const todos = getTodoSession();
