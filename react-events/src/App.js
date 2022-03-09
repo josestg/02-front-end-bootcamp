@@ -1,71 +1,123 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  // let variable = 1; // created. (value, address) => (1, (0, 2))
-  // variable = 2; // updated. (2, (0, 3))
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [user, setUser] = useState("");
 
-  // let variable = variable + 1; // created. (2, (2, 3))
-  // let variable = variable + 1; // created. (3, (3, 3))
+  // [{id: 1, title: "Todo 1", description: "Desc 1", user: "User 1"}]
+  const [todoList, setTodoList] = useState([]);
 
-  /**
-   *   0          1     2      3
-   * 0 (0, 0, 0) (0, 1)  (0,2, 1)  (0, 3, 2)
-   * 1 (1, 0, 10) (1, 1)  (1,2)  (1, 3)
-   * 2 (2, 0, 5) (3, 1)  (2,2)  (2, 3, 2)
-   * 3 (3, 0, 7) (3, 1)  (3,2)  (3, 3, 3)
-   */
-
-  const [state, setState] = useState(1);
-  const [price, setPrice] = useState(10_000);
-  const [subTotal, setSubTotal] = useState(0);
-  const [discontInUsed, setDiscontInUsed] = useState(false);
-
-  // state = 1 // direct. DONT
-  // setState(1 + 1) // DO
-
-  console.count("total render");
-
-  // const handleIncrement = () => setState(state + 2);
-  // const handleDecrement = () => setState(state - 1);
-
-  const handleAdd = (increment) => {
-    const amount = state + increment;
-    if (amount <= 0) {
-      return;
+  useEffect(() => {
+    // mengambil todoList dari localStorage apabila ada.
+    const storage = localStorage.getItem("todoList");
+    if (storage !== null) {
+      // Jika kita menemukan ada data di localStorage,
+      // kita ambil datanya dan kita jadikan sebagai initial state untuk
+      // todoList.
+      const obj = JSON.parse(storage);
+      setTodoList(obj);
     }
+  }, []);
 
-    const subTotal = amount * price;
-
-    setState(amount);
-    setSubTotal(subTotal);
-    if (subTotal >= 50_000) {
-      applyDiscont(0.5);
-    }
+  const handleTypingOnTitleInput = (event) => {
+    const value = event.target.value;
+    setTitle(value);
   };
 
-  const applyDiscont = (rate) => {
-    if (!discontInUsed) {
-      setPrice(price - price * rate);
-      setDiscontInUsed(true);
-    }
+  const handleTypingOnDescriptionInput = (event) => {
+    const value = event.target.value;
+    setDescription(value);
   };
-  // handleAdd(2) = setState(state + 2)
-  // handleAdd(-1) = setState(state + (-1)) = setState(state - 1)
+
+  const handleTypingOnUserInput = (event) => {
+    const value = event.target.value;
+    setUser(value);
+  };
+
+  const handleAddTodoList = (event) => {
+    event.preventDefault();
+    const newTodo = {
+      id: todoList.length + 1,
+      title: title,
+      description: description,
+      user: user,
+    };
+
+    // DONT. karna tidak boleh melakukan mutasi langsung ke state.
+    // todoList.push(newTodo);
+
+    // Kita membuat duplikat dari state yang memiliki isi yang sama persis.
+    const copyArray = [];
+    todoList.forEach((eachValue) => {
+      // Ternyata: eachValue adalag sebuah object,
+      // karna dia adalah sebuah object sudah pasti itu menggunakan
+      // pass by reference.
+      // Oleh karena itu kita juga harus membuat duplikat dari si eachValue.
+      //
+      // Ini sebagai landasan teman-teman memahami pass-by-refrence,
+      // immutable data structure, shallow and deep copy.
+      // Nantinya ketika sudah terbiasa kita akan mempertimbangkan menggunkan
+      // library: https://immerjs.github.io/immer.
+
+      const copyEachValue = Object.assign({}, eachValue);
+      copyArray.push(copyEachValue);
+    });
+
+    // BOLEH. karna yang kita mutasi saat ini adalah duplikat dari state. Bukan state-nya.
+    copyArray.push(newTodo);
+
+    // Kita update state menjadi copyArray.
+    setTodoList(copyArray);
+
+    // simpan ke localStorage.
+
+    localStorage.setItem("todoList", JSON.stringify(copyArray));
+  };
 
   return (
     <div>
-      <p>Item {state}</p>
-      <p>Price per item {price}</p>
-      <p>Sub total {state * price}</p>
-      {discontInUsed === true && (
-        <p>
-          <strong>Discont applied</strong>
-        </p>
-      )}
-      <button onClick={() => handleAdd(2)}>Add by 2</button>
-      <button onClick={() => handleAdd(3)}>Add by 3</button>
-      <button onClick={() => handleAdd(-1)}>Sub by 1</button>
-      <button onClick={() => applyDiscont(0.5)}>Apply 50% Discont</button>
+      <h4>Todo Form</h4>
+      <form onSubmit={handleAddTodoList}>
+        <label>Title</label>
+        <br />
+        <input
+          type="text"
+          placeholder="type your todo title"
+          onChange={(event) => handleTypingOnTitleInput(event)}
+        />
+        <br />
+        <label>Desc</label>
+        <br />
+        <textarea
+          type="text"
+          placeholder="type your todo description"
+          onChange={(event) => handleTypingOnDescriptionInput(event)}
+        />
+        <br />
+        <label>User</label>
+        <br />
+        <input
+          type="text"
+          placeholder="type your todo user"
+          onChange={(event) => handleTypingOnUserInput(event)}
+        />
+        <br />
+        <input type="submit" value="Add todo" />
+      </form>
+
+      <h4>Todo List</h4>
+      <ul>
+        {todoList.map((listItem) => {
+          return (
+            <li key={listItem.id}>
+              <p>{listItem.user}</p>
+              <p>{listItem.title}</p>
+              <p>{listItem.description}</p>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
