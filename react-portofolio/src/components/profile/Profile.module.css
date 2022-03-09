@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  border: 2px solid blue;
+  padding: 18px;
+  justify-content: center;
+}
+
+.content {
+  padding: 14px;
+}
+
+.bio {
+  font-style: italic;
+}
