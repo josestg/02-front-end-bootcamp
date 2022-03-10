@@ -1,17 +1,34 @@
 import { useEffect, useState } from "react";
 
+function Pekerjaan() {
+  const [job, setJob] = useState("");
+  const [salary, setSalary] = useState(0);
+
+  useEffect(() => {
+    setJob("Software Engineer");
+    setSalary(10_000_000);
+  }, []);
+
+  return (
+    <>
+      <li>Job: {job}</li>
+      <li>Salary: {salary}</li>
+    </>
+  );
+}
+
 function ProfileFC(props) {
-  const [state, setState] = useState({ name: "", age: 0 });
+  const [name, setName] = useState("");
+  const [age, setAge] = useState(0);
 
   // componentDidMount, ComponentDidUpdate, componentWillUnmount.
+  // DONT USE ASYNC!
+  //  https://ultimatecourses.com/blog/using-async-await-inside-react-use-effect-hook
   useEffect(() => {
     console.count("componentDidMount");
-    const copy = Object.assign({}, state);
 
-    copy.name = "Bob";
-    copy.age = 25;
-
-    setState(copy);
+    setAge(25);
+    setName("Bob");
 
     const timer = setInterval(() => {
       console.count("tick");
@@ -27,8 +44,12 @@ function ProfileFC(props) {
   }, []);
 
   useEffect(() => {
-    console.log("shouldComponentUpdate & componentDidUpdate", state);
-  }, [state]);
+    console.log("Props changed", props);
+  }, [props]);
+
+  useEffect(() => {
+    console.log("shouldComponentUpdate & componentDidUpdate", age);
+  }, [age]);
 
   //   useEffect(() => {
   //     console.log("shouldComponentUpdate & componentDidUpdate", state);
@@ -40,16 +61,15 @@ function ProfileFC(props) {
 
   const handleOnClick = () => {
     console.count("handleOnClick");
-    const copy = Object.assign({}, state);
-    copy.age++;
-    setState(copy);
+    setAge(age + 1);
   };
 
   console.count("render");
   return (
     <ol>
-      <li>Name: {state.name}</li>
-      <li>Age : {state.age}</li>
+      <li>Name: {name}</li>
+      <li>Age : {age}</li>
+      <Pekerjaan />
       <button onClick={handleOnClick}>Add Age</button>
     </ol>
   );

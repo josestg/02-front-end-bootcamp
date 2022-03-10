@@ -20,7 +20,7 @@ function App() {
       </button>
 
       {/* {active && <Profile />} */}
-      {active && <ProfileFC />}
+      {active && <ProfileFC active={active} />}
     </div>
   );
 }
