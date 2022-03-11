@@ -1,23 +1,30 @@
 import styles from "./Product.module.css";
+import PropTypes from "prop-types";
 
 function ProductCard(props) {
+  const { title, image, price } = props;
+
   return (
     <div className={styles.container}>
       <div className={styles.image}>
-        <img
-          src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-          alt="product image"
-        />
+        <img src={image} alt={title} />
       </div>
       <div className={styles.description}>
         <div className={styles.title}>
-          <h1>Fjallraven - Foldsack No. 1 Backpack</h1>
-          <p>$109.95</p>
+          <h1>{title}</h1>
+          <p>${price}</p>
           <button>Buy</button>
         </div>
       </div>
     </div>
   );
 }
+
+ProductCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+};
 
 export default ProductCard;

@@ -1,19 +1,30 @@
 import styles from "./Search.module.css";
+import { useState } from "react";
+import PropsTypes from "prop-types";
 
 function Search(props) {
+  const { keyword, onSearch } = props;
+
   return (
     <div className={styles.container}>
-      <form id={styles.content}>
+      <div id={styles.content}>
         <input
           type="text"
           name="input"
           placeholder="Search by title..."
-          class={(styles.input, styles.square)}
+          className={(styles.input, styles.square)}
           id="search-input"
+          value={keyword}
+          onChange={(e) => onSearch(e.target.value)}
         />
-      </form>
+      </div>
     </div>
   );
 }
+
+Search.propTypes = {
+  keyword: PropsTypes.string.isRequired,
+  onSearch: PropsTypes.func.isRequired,
+};
 
 export default Search;

@@ -1,4 +1,5 @@
 import styles from "./Avatar.module.css";
+import PropTypes from "prop-types";
 
 function Avatar(props) {
   const url = props.url;
@@ -9,5 +10,9 @@ function Avatar(props) {
     </div>
   );
 }
+
+Avatar.propTypes = {
+  url: PropTypes.string.isRequired,
+};
 
 export default Avatar;
