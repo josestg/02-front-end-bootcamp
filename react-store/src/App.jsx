@@ -1,10 +1,26 @@
 import Navbar from "./components/navbar/Navbar";
+import ProductCard from "./components/product/Product";
+import Search from "./components/search/Search";
+import styles from "./App.module.css";
 
 function App() {
   return (
     <div>
       <Navbar />
-      <h1>Hello, World</h1>
+
+      <Search />
+
+      <div className={styles.products}>
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+      </div>
     </div>
   );
 }
