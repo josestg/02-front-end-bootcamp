@@ -1,39 +1,18 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Comments from "../Comments/Comments";
+import { Fetch } from "../hooks/fetch";
 
 function Detail(props) {
   const { id } = useParams();
   //   const id = params.id;
 
-  // kita ingin menyimpan detail post berdasarkan id yang diperoleh dari API.
-  const [state, setState] = useState({
-    title: "",
-    body: "",
-  });
-  // kita akan gunakan object untuk menyimpan informasi errornya
-  // ketika terjadi error pada saat call API.
-  const [error, setError] = useState(null);
-  // kita gunakan boolean untuk mengetahui apakah proses call API
-  // sudah selesai atau belum. Pada saat awal loading=true
-  // artinya kita sedang dalam proses call API.
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts/" + id, { method: "GET" })
-      .then((response) => response.json())
-      .then((post) => {
-        // setTimeout kita gunakan untuk mensimulasikan loading.
-        setTimeout(() => {
-          setLoading(false);
-          setState(post);
-        }, 3 * 1000);
-      })
-      .catch((error) => {
-        setLoading(false);
-        setError(error);
-      });
-  }, []);
+  const { state, loading, error } = Fetch(
+    "https://jsonplaceholder.typicode.com/posts/" + id,
+    {
+      title: "",
+      body: "",
+    }
+  );
 
   if (loading) {
     return <p>Loading....</p>;
