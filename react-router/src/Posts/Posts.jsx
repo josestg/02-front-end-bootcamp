@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Post from "../Post/Post";
 
 function Posts() {
@@ -11,6 +12,19 @@ function Posts() {
   // sudah selesai atau belum. Pada saat awal loading=true
   // artinya kita sedang dalam proses call API.
   const [loading, setLoading] = useState(true);
+
+  //   const navigate = useNavigate();
+
+  //   useEffect(() => {
+  //     setTimeout(() => {
+  //       if (loading) {
+  //         if(isUserLoggedIn){
+  //             navigate("/sign-in");
+  //         }
+  //         navigate("/users");
+  //       }
+  //     }, 2 * 1000);
+  //   }, []);
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts", { method: "GET" })
