@@ -1,11 +1,16 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function Post(props) {
-  const { title } = props;
+  const { title, id } = props;
+
+  const detailURL = `/posts/${id}`;
 
   return (
     <div>
-      <h4>{title}</h4>
+      <Link to={detailURL}>
+        <h4>{title}</h4>
+      </Link>
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 import Comments from "../Comments/Comments";
 
 function Detail(props) {
-  const { id } = props;
+  const { id } = useParams();
+  //   const id = params.id;
 
   // kita ingin menyimpan detail post berdasarkan id yang diperoleh dari API.
   const [state, setState] = useState({
@@ -51,9 +52,5 @@ function Detail(props) {
     </div>
   );
 }
-
-Detail.propTypes = {
-  id: PropTypes.number.isRequired,
-};
 
 export default Detail;

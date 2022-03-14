@@ -56,7 +56,7 @@ function Comments(props) {
 }
 
 Comments.propTypes = {
-  postID: PropTypes.number.isRequired,
+  postID: PropTypes.string.isRequired,
 };
 
 export default Comments;

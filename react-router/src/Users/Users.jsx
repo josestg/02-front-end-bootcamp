@@ -37,6 +37,8 @@ function Users(props) {
 
   return (
     <div>
+      <h1>Users Page</h1>
+
       {state.map((user) => {
         return (
           <div key={user.id}>

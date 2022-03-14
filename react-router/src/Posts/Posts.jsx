@@ -38,6 +38,8 @@ function Posts() {
 
   return (
     <section>
+      <h1>Posts Page</h1>
+
       {state.map((post) => (
         <Post key={post.id} id={post.id} title={post.title} />
       ))}
