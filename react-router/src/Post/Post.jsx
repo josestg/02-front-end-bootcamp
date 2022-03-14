@@ -1,16 +1,23 @@
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Post(props) {
   const { title, id } = props;
 
-  const detailURL = `/posts/${id}`;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    const detailURL = `/posts/${id}`;
+    navigate(detailURL);
+  };
 
   return (
     <div>
-      <Link to={detailURL}>
+      {/* <Link to={detailURL}>
         <h4>{title}</h4>
-      </Link>
+      </Link> */}
+
+      <h4 onClick={handleClick}>{title}</h4>
     </div>
   );
 }
