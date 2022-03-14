@@ -1,5 +1,7 @@
+import Users from "./Users/Users";
+
 function App() {
-  return <h1>Hello, World</h1>;
+  return <Users />;
 }
 
 export default App;
