@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import ProductCard from "../../components/product/Product";
 import Search from "../../components/search/Search";
 import styles from "./Home.module.css";
@@ -7,7 +8,7 @@ import * as productAPI from "../../api/product.api";
 import * as searchHelper from "../../helpers/search.helper";
 import { useFetch } from "../../hooks/fetcher";
 
-function Home() {
+function Home(props) {
   // filtered ini yang akan kita tampilkan di browser.
   // Pada saat kondisi awal, filtered akan sama dengan original.
   // Tetapi jika terjadi perubahan keyword maka isi filtered
@@ -15,8 +16,7 @@ function Home() {
   const [filtered, setFiltered] = useState([]);
   const [keyword, setKeyword] = useState("");
 
-  // contoh: [{id: 1, count: 2}, {id: 2, count: 1}, {id: 3, count: 1}]
-  const [bucket, setBucket] = useState([]);
+  const { onBuy } = props;
 
   const {
     state: products,
@@ -44,30 +44,6 @@ function Home() {
     setKeyword(updates);
   };
 
-  const handleBuy = (id) => {
-    // 1. buat copy dari bucket, sehingga kita aman untuk melakukan mutasi langsung.
-    // TODO: menggunakan immerjs
-    const copyBucket = searchHelper.deepCopyArrayOfObject(bucket);
-
-    // 2. kita cek apakah id tersebut sudah ada di bucket.
-    const found = copyBucket.find((item) => item.id === id);
-    // 3. apabila sudah ada kita tinggal menaikkan jumlah count = count + 1.
-    if (found !== undefined) {
-      found.count = found.count + 1;
-    } else {
-      // 4. jika tidak, maka kita tambahkan id tersebut kedalam bucket dengan count awal adalah 1.
-      copyBucket.push({
-        id: id,
-        count: 1,
-      });
-    }
-
-    // 5. Update state bucket menjadi copyBucket yang sudah dimutasi.
-    setBucket(copyBucket);
-  };
-
-  console.log("BUCKET", bucket);
-
   if (loading) {
     return <p>Loading....</p>;
   }
@@ -90,7 +66,7 @@ function Home() {
               price={product.price}
               title={product.title}
               image={product.image}
-              onBuy={handleBuy}
+              onBuy={onBuy}
             />
           ))}
         </div>
@@ -98,5 +74,9 @@ function Home() {
     </div>
   );
 }
+
+Home.propTypes = {
+  onBuy: PropTypes.func.isRequired,
+};
 
 export default Home;
