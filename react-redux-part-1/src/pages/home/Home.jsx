@@ -52,10 +52,6 @@ function Home() {
 
   return (
     <div>
-      <Navbar
-        items={10}
-        avatar="https://www.brand-her.com/wp-content/uploads/2014/02/team1.jpg"
-      />
       <Search keyword={keyword} onSearch={handleSearch} />
       {loading ? (
         <h1>Loading...</h1>
