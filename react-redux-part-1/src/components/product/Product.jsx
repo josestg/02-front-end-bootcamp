@@ -2,7 +2,7 @@ import styles from "./Product.module.css";
 import PropTypes from "prop-types";
 
 function ProductCard(props) {
-  const { title, image, price } = props;
+  const { id, title, image, price, onBuy } = props;
 
   return (
     <div className={styles.container}>
@@ -13,7 +13,7 @@ function ProductCard(props) {
         <div className={styles.title}>
           <h1>{title}</h1>
           <p>${price}</p>
-          <button>Buy</button>
+          <button onClick={() => onBuy(id)}>Buy</button>
         </div>
       </div>
     </div>
@@ -25,6 +25,7 @@ ProductCard.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  onBuy: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

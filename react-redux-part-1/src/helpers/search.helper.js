@@ -10,3 +10,14 @@ export function search(arr, keyword) {
     return title.includes(target);
   });
 }
+
+export function deepCopyArrayOfObject(arrOfObject) {
+  const copy = [];
+  for (let i = 0; i < arrOfObject.length; i++) {
+    const objectItem = arrOfObject[i];
+    const objectCopy = Object.assign({}, objectItem);
+    copy.push(objectCopy);
+  }
+
+  return copy;
+}
