@@ -23,7 +23,7 @@ export function useFetch(apiFetcher, initial) {
         // setTimeout kita gunakan untuk mensimulasikan loading.
         setTimeout(() => {
           setState(state);
-        }, 3 * 1000);
+        }, 500);
       })
       .catch((error) => {
         setError(error);
