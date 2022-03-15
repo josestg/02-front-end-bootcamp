@@ -1,0 +1,10 @@
+.container {
+  width: 40px;
+  max-width: 40px;
+  border-radius: 50%;
+}
+
+.image {
+  border-radius: 50%;
+  width: 100%;
+}
