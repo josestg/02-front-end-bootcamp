@@ -1,4 +1,3 @@
-import Navbar from "../../components/navbar/Navbar";
 import ProductCard from "../../components/product/Product";
 import Search from "../../components/search/Search";
 import styles from "./Home.module.css";
