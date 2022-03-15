@@ -20,10 +20,11 @@ export function useFetch(apiFetcher, initial) {
   useEffect(() => {
     apiFetcher()
       .then((state) => {
-        // setTimeout kita gunakan untuk mensimulasikan loading.
-        setTimeout(() => {
-          setState(state);
-        }, 500);
+        setState(state);
+        // // setTimeout kita gunakan untuk mensimulasikan loading.
+        // setTimeout(() => {
+
+        // }, 500);
       })
       .catch((error) => {
         setError(error);
