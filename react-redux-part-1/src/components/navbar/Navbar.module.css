@@ -1,0 +1,50 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px;
+  margin-bottom: 20px;
+}
+
+.user {
+  display: flex;
+}
+
+.brand,
+.cart,
+.avatar {
+  padding: 0 16px;
+}
+
+.brand {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart {
+  margin-right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.items {
+  font-weight: bold;
+  font-size: 8px;
+  padding: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: red;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

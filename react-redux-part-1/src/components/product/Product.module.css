@@ -1,0 +1,26 @@
+.image {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image img {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.container {
+  width: 150px;
+  padding: 16px;
+  margin: 16px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.title h1 {
+  font-size: 12px;
+}
+
+.description {
+  display: flex;
+}
