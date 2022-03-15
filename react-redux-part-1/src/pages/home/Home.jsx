@@ -6,36 +6,27 @@ import { useEffect, useState } from "react";
 
 import * as productAPI from "../../api/product.api";
 import * as searchHelper from "../../helpers/search.helper";
+import { useFetch } from "../../hooks/fetcher";
 
 function Home() {
-  // products menyimpan hasil original product.
-  // kita perlu menyimpan yang original agar ketika keyword search
-  // kosong kita bisa mengembalikan filtered ke hasil original.
-  const [products, setProducts] = useState([]);
   // filtered ini yang akan kita tampilkan di browser.
   // Pada saat kondisi awal, filtered akan sama dengan original.
   // Tetapi jika terjadi perubahan keyword maka isi filtered
   // akan berbeda dengan yang original.
   const [filtered, setFiltered] = useState([]);
-
-  const [loading, setLoading] = useState(true);
-
   const [keyword, setKeyword] = useState("");
+
+  const {
+    state: products,
+    loading,
+    error,
+  } = useFetch(productAPI.fetchAllProducts, []);
 
   // karena kita akan call api.
   // maka kita butuh fase componentDidMount.
   useEffect(() => {
-    productAPI
-      .fetchAllProducts()
-      .then((result) => {
-        setProducts(result);
-        setFiltered(result); // Kita samakan filtered dengan yang original pada saat pertama kali.
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    setFiltered(products);
+  }, [products]);
 
   useEffect(() => {
     if (keyword.length > 0) {
@@ -50,6 +41,14 @@ function Home() {
   const handleSearch = (updates) => {
     setKeyword(updates);
   };
+
+  if (loading) {
+    return <p>Loading....</p>;
+  }
+
+  if (error != null) {
+    return <p>{error.message}</p>;
+  }
 
   return (
     <div>
