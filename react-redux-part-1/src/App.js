@@ -55,6 +55,7 @@ function App() {
     setBucket(copyBucket.filter((e) => e.count > 0));
   };
 
+  // view
   return (
     <>
       <Navbar
