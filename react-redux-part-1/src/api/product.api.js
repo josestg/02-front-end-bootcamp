@@ -1,4 +1,4 @@
-const BASE_URL = "https://fakestoreapi.com";
+const BASE_URL = "http://localhost:4000";
 
 export async function fetchAllProducts() {
   try {
