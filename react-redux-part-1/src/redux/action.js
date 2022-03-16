@@ -11,7 +11,7 @@ export function initProducts(newProducts) {
 
 export function addProductCart(id) {
   return {
-    type: ACTION_INIT_PRODUCTS,
+    type: ACTION_ADD_PRODUCT_TO_CART,
     payload: {
       id: id,
     },
