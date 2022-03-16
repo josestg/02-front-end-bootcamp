@@ -3,16 +3,31 @@ import {
   ACTION_ADD_PRODUCT_TO_CART,
   ACTION_DEL_PRODUCT_FROM_CART,
   ACTION_INIT_PRODUCTS,
+  ACTION_UNUSED_DISCONT,
+  ACTION_USE_DISCONT,
 } from "./action";
 import {
   addProductCartReducer,
   delProductCartReducer,
   initProductReducer,
+  unUsedDiscontReducer,
+  takeDiscontReducer,
 } from "./reducer";
 
 const initialState = {
   products: [], // list of product
   cartProducts: [], // [{id: 1, count: 5}]
+  coupons: [
+    {
+      name: "REACT",
+      rate: 0.2,
+    },
+    {
+      name: "REDUX",
+      rate: 0.5,
+    },
+  ],
+  usedCoupons: [],
 };
 
 /**
@@ -33,6 +48,10 @@ function reducer(state = initialState, action) {
       return addProductCartReducer(state, action.payload);
     case ACTION_DEL_PRODUCT_FROM_CART:
       return delProductCartReducer(state, action.payload);
+    case ACTION_USE_DISCONT:
+      return takeDiscontReducer(state, action.payload);
+    case ACTION_UNUSED_DISCONT:
+      return unUsedDiscontReducer(state, action.payload);
     default:
       // If the reducer doesn't care about this action type,
       // return the existing state unchanged
