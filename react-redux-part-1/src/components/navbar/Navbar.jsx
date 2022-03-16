@@ -3,9 +3,12 @@ import styles from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 function Navbar(props) {
-  const { items, avatar } = props;
+  const { avatar } = props;
+
+  const cart = useSelector((state) => state.cartProducts);
 
   return (
     <div className={styles.navbar}>
@@ -19,7 +22,7 @@ function Navbar(props) {
           <Link to="/checkout">
             <p>Cart</p>
           </Link>
-          <span className={styles.items}>{items}</span>
+          <span className={styles.items}>{cart.length}</span>
         </div>
         <div className={styles.avatar}>
           <Avatar url={avatar} />
@@ -30,7 +33,6 @@ function Navbar(props) {
 }
 
 Navbar.propTypes = {
-  items: PropTypes.number.isRequired,
   avatar: PropTypes.string.isRequired,
 };
 

@@ -1,39 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import store from "./redux/store";
-import { addProductCart, delProductCart, initProducts } from "./redux/action";
-
-store.subscribe(() => {
-  const updatedState = store.getState();
-  console.log(updatedState);
-});
-
-store.dispatch(
-  initProducts([
-    {
-      id: 1,
-      title: "product 1",
-    },
-  ])
-);
-
-store.dispatch(addProductCart(1));
-store.dispatch(addProductCart(1));
-store.dispatch(addProductCart(2));
-
-store.dispatch(delProductCart(1));
-store.dispatch(delProductCart(1));
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

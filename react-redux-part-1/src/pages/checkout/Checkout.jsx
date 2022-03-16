@@ -1,37 +1,21 @@
-import { useFetch } from "../../hooks/fetcher";
 import styles from "./Checkout.module.css";
-import PropTypes from "prop-types";
 
-import { fetchProductByIDs } from "../../api/product.api";
 import ProductCart from "../../components/product-cart/ProductCart";
+import { useSelector } from "react-redux";
 
-function Checkout(props) {
-  console.log("render");
-  const { bucket, onBuy, onRemove } = props;
+function Checkout() {
+  const cart = useSelector((state) => state.cartProducts);
+  const products = useSelector((state) => state.products);
 
-  const selectedIDs = bucket.map((item) => item.id);
-  const fetcher = async () => {
-    const products = await fetchProductByIDs(selectedIDs);
-    return products.map((p) => {
-      const { count } = bucket.find((item) => item.id === p.id);
-      return {
-        ...p,
-        selectedCount: count,
-      };
-    });
-  };
+  const productsInCart = cart.map((item) => {
+    const found = products.find((product) => product.id === item.id);
+    return {
+      ...found,
+      selectedCount: item.count,
+    };
+  });
 
-  const { state: products, error, loading } = useFetch(fetcher, []);
-
-  if (loading) {
-    return <p>Loading....</p>;
-  }
-
-  if (error != null) {
-    return <p>{error.message}</p>;
-  }
-
-  const subTotal = products.reduce((acc, cur) => {
+  const subTotal = productsInCart.reduce((acc, cur) => {
     const { selectedCount, price } = cur;
     const totalPriceEachProduct = selectedCount * price;
     return acc + totalPriceEachProduct;
@@ -41,7 +25,7 @@ function Checkout(props) {
     <div>
       <h3>Sub Total: ${subTotal.toFixed(2)}</h3>
       <div className={styles.products}>
-        {products.map((product) => {
+        {productsInCart.map((product) => {
           return (
             <ProductCart
               key={product.id}
@@ -50,8 +34,6 @@ function Checkout(props) {
               title={product.title}
               image={product.image}
               count={product.selectedCount}
-              onBuy={onBuy}
-              onRemove={onRemove}
             />
           );
         })}
@@ -60,10 +42,6 @@ function Checkout(props) {
   );
 }
 
-Checkout.propTypes = {
-  bucket: PropTypes.array.isRequired,
-  onBuy: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired,
-};
+Checkout.propTypes = {};
 
 export default Checkout;

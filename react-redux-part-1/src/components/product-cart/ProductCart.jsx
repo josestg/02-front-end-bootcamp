@@ -1,8 +1,22 @@
 import styles from "./ProductCart.module.css";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { addProductCart, delProductCart } from "../../redux/action";
 
 function ProductCart(props) {
-  const { id, title, image, price, count, onBuy, onRemove } = props;
+  const { id, title, image, price, count } = props;
+
+  const dispatch = useDispatch();
+
+  const handleBuy = (id) => {
+    const action = addProductCart(id);
+    dispatch(action);
+  };
+
+  const handleRemove = (id) => {
+    const action = delProductCart(id);
+    dispatch(action);
+  };
 
   return (
     <div className={styles.container}>
@@ -18,8 +32,8 @@ function ProductCart(props) {
       <div className={styles.action}>
         <strong>Items: {count}</strong>
         <div>
-          <button onClick={() => onBuy(id)}>+</button>
-          <button onClick={() => onRemove(id)}>-</button>
+          <button onClick={() => handleBuy(id)}>+</button>
+          <button onClick={() => handleRemove(id)}>-</button>
         </div>
       </div>
     </div>
@@ -32,8 +46,6 @@ ProductCart.propTypes = {
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   count: PropTypes.number.isRequired,
-  onBuy: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired,
 };
 
 export default ProductCart;
