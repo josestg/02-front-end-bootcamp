@@ -28,7 +28,6 @@ function reducer(state = initialState, action) {
   // to decide how to update the state
   switch (action.type) {
     case ACTION_INIT_PRODUCTS:
-      console.log(action);
       return initProductReducer(state, action.payload);
     case ACTION_ADD_PRODUCT_TO_CART:
       return addProductCartReducer(state, action.payload);
