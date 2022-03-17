@@ -3,12 +3,20 @@ import styles from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductCartAPI } from "../../redux/action";
+import { useEffect } from "react";
 
 function Navbar(props) {
   const { avatar } = props;
 
   const cart = useSelector((state) => state.cartProducts);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProductCartAPI());
+  }, [dispatch]);
 
   return (
     <div className={styles.navbar}>

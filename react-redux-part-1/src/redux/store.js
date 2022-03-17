@@ -1,8 +1,11 @@
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
 import {
   ACTION_ADD_PRODUCT_TO_CART,
   ACTION_DEL_PRODUCT_FROM_CART,
   ACTION_INIT_PRODUCTS,
+  ACTION_SET_PRODUCT_CART,
   ACTION_UNUSED_DISCONT,
   ACTION_USE_DISCONT,
 } from "./action";
@@ -12,11 +15,12 @@ import {
   initProductReducer,
   unUsedDiscontReducer,
   takeDiscontReducer,
+  initProductCartReducer,
 } from "./reducer";
 
 const initialState = {
   products: [], // list of product
-  cartProducts: [], // [{id: 1, count: 5}]
+  cartProducts: [], // [{id: 1, count: 5, cartid: []}]
   coupons: [
     {
       name: "REACT",
@@ -52,6 +56,8 @@ function reducer(state = initialState, action) {
       return takeDiscontReducer(state, action.payload);
     case ACTION_UNUSED_DISCONT:
       return unUsedDiscontReducer(state, action.payload);
+    case ACTION_SET_PRODUCT_CART:
+      return initProductCartReducer(state, action.payload);
     default:
       // If the reducer doesn't care about this action type,
       // return the existing state unchanged
@@ -59,9 +65,7 @@ function reducer(state = initialState, action) {
   }
 }
 
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const composed = composeWithDevTools(applyMiddleware(thunk));
+const store = createStore(reducer, composed);
 
 export default store;

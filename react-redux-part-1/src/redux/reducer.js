@@ -8,6 +8,14 @@ export function initProductReducer(state, payload) {
   return nextState;
 }
 
+export function initProductCartReducer(state, payload) {
+  const nextState = produce(state, (draf) => {
+    draf.cartProducts = payload.carts;
+  });
+
+  return nextState;
+}
+
 export function addProductCartReducer(state, payload) {
   const nextState = produce(state, (draf) => {
     const cart = draf.cartProducts;
@@ -34,6 +42,10 @@ export function delProductCartReducer(state, payload) {
 
       if (cart[index].count === 0) {
         cart.splice(index, 1);
+      } else {
+        cart[index].cartid = cart[index].cartid.filter(
+          (id) => id !== payload.cid
+        );
       }
     }
   });

@@ -1,7 +1,7 @@
 import styles from "./ProductCart.module.css";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { addProductCart, delProductCart } from "../../redux/action";
+import { addProductCartAPI, delProductCartAPI } from "../../redux/action";
 
 function ProductCart(props) {
   const { id, title, image, price, count } = props;
@@ -9,12 +9,12 @@ function ProductCart(props) {
   const dispatch = useDispatch();
 
   const handleBuy = (id) => {
-    const action = addProductCart(id);
+    const action = addProductCartAPI(id);
     dispatch(action);
   };
 
   const handleRemove = (id) => {
-    const action = delProductCart(id);
+    const action = delProductCartAPI(id);
     dispatch(action);
   };
 
