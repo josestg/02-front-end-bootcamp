@@ -1,5 +1,17 @@
+import InputTodo from "./components/InputTodo";
+import TodoList from "./components/TodoList";
+
 function App() {
-  return <h1>Hello, World</h1>;
+  return (
+    <div
+      style={{
+        padding: "30px",
+      }}
+    >
+      <InputTodo />
+      <TodoList />
+    </div>
+  );
 }
 
 export default App;

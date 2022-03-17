@@ -1,0 +1,19 @@
+.todos {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px;
+}
+
+.completed {
+  background-color: cornflowerblue;
+}
+
+.todos h4 {
+  padding: 8px 4px;
+}
+
+.todos button {
+  height: 28px;
+}
