@@ -1,5 +1,11 @@
 import produce from "immer";
 import { createContext, useEffect, useState } from "react";
+import {
+  createTodo,
+  deleteTodo,
+  retrieveTodos,
+  updateTodo,
+} from "../api/todos.api";
 
 const initialValue = {
   loading: true,
@@ -18,32 +24,17 @@ const TodoProvider = (props) => {
   const [todos, setTodos] = useState(initialValue.todos);
 
   useEffect(() => {
-    fetch("http://localhost:4000/todos", {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-      },
-    })
-      .then((response) => response.json())
+    retrieveTodos()
       .then((data) => setTodos(data))
       .catch((error) => setError(error))
       .finally(() => setLoading(false));
   }, []);
 
   const addTodo = async (title) => {
-    const response = await fetch("http://localhost:4000/todos", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        title: title,
-        completed: false,
-      }),
+    const createdTodo = await createTodo({
+      title: title,
+      completed: false,
     });
-
-    const createdTodo = await response.json();
 
     const nextTodos = produce(todos, (drafTodo) => {
       drafTodo.push(createdTodo);
@@ -53,15 +44,7 @@ const TodoProvider = (props) => {
   };
 
   const delTodo = async (id) => {
-    const response = await fetch("http://localhost:4000/todos/" + id, {
-      method: "DELETE",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-      },
-    });
-
-    await response.json();
+    await deleteTodo(id);
 
     const nextTodos = produce(todos, (drafTodo) => {
       const index = drafTodo.findIndex((todo) => todo.id === id);
@@ -74,18 +57,7 @@ const TodoProvider = (props) => {
   };
 
   const updateCompleteStatus = async (id, completed) => {
-    const response = await fetch("http://localhost:4000/todos/" + id, {
-      method: "PATCH",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        completed: completed,
-      }),
-    });
-
-    await response.json();
+    await updateTodo(id, completed);
 
     const nextTodos = produce(todos, (drafTodo) => {
       const index = drafTodo.findIndex((todo) => todo.id === id);
