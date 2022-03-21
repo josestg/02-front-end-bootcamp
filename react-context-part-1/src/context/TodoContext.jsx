@@ -8,9 +8,11 @@ import {
 } from "../api/todos.api";
 
 const initialValue = {
-  loading: true,
-  error: null,
-  todos: [],
+  state: {
+    loading: true,
+    error: null,
+    todos: [],
+  },
   addTodo: (title) => {},
   delTodo: (id) => {},
   updateCompleteStatus: (id, completed) => {},
@@ -78,8 +80,6 @@ export const TodoContext = createContext(initialValue);
 const TodoProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { loading, error, todos } = state;
-
   useEffect(() => {
     dispatch({ type: START_LOADING });
     retrieveTodos()
@@ -106,9 +106,7 @@ const TodoProvider = (props) => {
       .catch((error) => dispatch({ type: SET_ERROR, payload: { error } }));
 
   const value = {
-    loading: loading,
-    error: error,
-    todos: todos,
+    state: state,
     addTodo: addTodo,
     delTodo: delTodo,
     updateCompleteStatus: updateCompleteStatus,

@@ -4,7 +4,11 @@ import Counter from "./Counter";
 import Todo from "./Todo";
 
 const TodoList = () => {
-  const { loading, error, todos } = useContext(TodoContext);
+  const {
+    loading,
+    error,
+    state: { todos },
+  } = useContext(TodoContext);
 
   if (loading) {
     return <h1>Loading...</h1>;
