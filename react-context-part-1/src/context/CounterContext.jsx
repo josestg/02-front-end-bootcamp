@@ -14,7 +14,7 @@ export const CounterContext = createContext({
 
 // const initialState = { count: 0 };
 const initializer = (arg) => {
-  return { count: arg.n };
+  return { count: arg.count };
 };
 
 const reducer = (state, action) => {
@@ -33,7 +33,7 @@ const reducer = (state, action) => {
 };
 
 const CounterProvider = (props) => {
-  const initialCount = { n: 0 };
+  const initialCount = { count: 0 };
 
   const [state, dispatch] = useReducer(reducer, initialCount, initializer);
 

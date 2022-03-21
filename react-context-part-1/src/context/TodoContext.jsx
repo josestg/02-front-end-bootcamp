@@ -11,9 +11,9 @@ const initialValue = {
   loading: true,
   error: null,
   todos: [],
-  addTodo: async (title) => {},
-  delTodo: async (id) => {},
-  updateCompleteStatus: async (id, completed) => {},
+  addTodo: (title) => {},
+  delTodo: (id) => {},
+  updateCompleteStatus: (id, completed) => {},
 };
 
 const SET_TODO = "set_todo";
@@ -90,24 +90,20 @@ const TodoProvider = (props) => {
       .finally(() => dispatch({ type: STOP_LOADING }));
   }, []);
 
-  const addTodo = async (title) => {
-    const createdTodo = await createTodo({
-      title: title,
-      completed: false,
-    });
+  const addTodo = (title) =>
+    createTodo({ title, completed: false })
+      .then((todos) => dispatch({ type: ADD_TODO, payload: { todos } }))
+      .catch((error) => dispatch({ type: SET_ERROR, payload: { error } }));
 
-    dispatch({ type: ADD_TODO, payload: { todos: createdTodo } });
-  };
+  const delTodo = (id) =>
+    deleteTodo(id)
+      .then(() => dispatch({ type: DEL_TODO, payload: { id } }))
+      .catch((error) => dispatch({ type: SET_ERROR, payload: { error } }));
 
-  const delTodo = async (id) => {
-    await deleteTodo(id);
-    dispatch({ type: DEL_TODO, payload: { id: id } });
-  };
-
-  const updateCompleteStatus = async (id, completed) => {
-    await updateTodo(id, completed);
-    dispatch({ type: UPT_TODO, payload: { id: id, completed: completed } });
-  };
+  const updateCompleteStatus = (id, completed) =>
+    updateTodo(id, completed)
+      .then(() => dispatch({ type: UPT_TODO, payload: { id, completed } }))
+      .catch((error) => dispatch({ type: SET_ERROR, payload: { error } }));
 
   const value = {
     loading: loading,
