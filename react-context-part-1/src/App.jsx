@@ -1,3 +1,4 @@
+import Counter from "./components/Counter";
 import InputTodo from "./components/InputTodo";
 import TodoList from "./components/TodoList";
 import Toolbar from "./components/Toolbar";
@@ -13,6 +14,7 @@ function App() {
         }}
       >
         <Toolbar />
+        <Counter />
         <TodoProvider>
           <InputTodo />
           <TodoList />

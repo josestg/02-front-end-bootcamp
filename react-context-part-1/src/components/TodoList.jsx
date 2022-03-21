@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { TodoContext } from "../context/TodoContext";
+import Counter from "./Counter";
 import Todo from "./Todo";
 
 const TodoList = () => {
@@ -23,6 +24,8 @@ const TodoList = () => {
           completed={todo.completed}
         />
       ))}
+
+      <Counter />
     </div>
   );
 };
