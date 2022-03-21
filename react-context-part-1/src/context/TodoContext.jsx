@@ -75,6 +75,7 @@ const TodoProvider = (props) => {
   const { loading, error, todos } = state;
 
   useEffect(() => {
+    dispatch({ type: START_LOADING });
     retrieveTodos()
       .then((data) => dispatch({ type: SET_TODO, payload: { todos: data } }))
       .catch((error) =>
