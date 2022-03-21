@@ -83,10 +83,8 @@ const TodoProvider = (props) => {
   useEffect(() => {
     dispatch({ type: START_LOADING });
     retrieveTodos()
-      .then((data) => dispatch({ type: SET_TODO, payload: { todos: data } }))
-      .catch((error) =>
-        dispatch({ type: SET_ERROR, payload: { error: error } })
-      )
+      .then((todos) => dispatch({ type: SET_TODO, payload: { todos } }))
+      .catch((error) => dispatch({ type: SET_ERROR, payload: { error } }))
       .finally(() => dispatch({ type: STOP_LOADING }));
   }, []);
 
@@ -106,10 +104,10 @@ const TodoProvider = (props) => {
       .catch((error) => dispatch({ type: SET_ERROR, payload: { error } }));
 
   const value = {
-    state: state,
-    addTodo: addTodo,
-    delTodo: delTodo,
-    updateCompleteStatus: updateCompleteStatus,
+    state,
+    addTodo,
+    delTodo,
+    updateCompleteStatus,
   };
 
   return (
