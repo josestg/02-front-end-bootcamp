@@ -30,6 +30,12 @@ const initialState = {
   error: null,
 };
 
+/**
+ * Ini hanya comment untuk membuat tipe data. Tidak ada pengaruhnya ke logika application.
+ * @param {{todos: Array<{id: number, title: string, completed: boolean}>}} state
+ * @param {{type: SET_TODO | ADD_TODO | DEL_TODO | UPT_TODO |SET_ERROR |START_LOADING |STOP_LOADING, payload: { id?:number, error?: Error, loading?: boolean, todos?: Array<{id: number, title: string, completed: boolean}>}}} action
+ * @returns {{todos: Array<{id: number, title: string, completed: boolean}>}}
+ */
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
