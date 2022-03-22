@@ -18,13 +18,13 @@ const initialValue = {
   updateCompleteStatus: (id, completed) => {},
 };
 
-const SET_TODO = "set_todo";
-const ADD_TODO = "add_todo";
-const DEL_TODO = "del_todo";
-const UPT_TODO = "upt_todo";
-const SET_ERROR = "set_error";
-const START_LOADING = "start_loading";
-const STOP_LOADING = "stop_loading";
+export const SET_TODO = "set_todo";
+export const ADD_TODO = "add_todo";
+export const DEL_TODO = "del_todo";
+export const UPT_TODO = "upt_todo";
+export const SET_ERROR = "set_error";
+export const START_LOADING = "start_loading";
+export const STOP_LOADING = "stop_loading";
 
 const initialState = {
   todos: [],
@@ -38,7 +38,7 @@ const initialState = {
  * @param {{type: SET_TODO | ADD_TODO | DEL_TODO | UPT_TODO |SET_ERROR |START_LOADING |STOP_LOADING, payload: { id?:number, error?: Error, loading?: boolean, todos?: Array<{id: number, title: string, completed: boolean}>}}} action
  * @returns {{todos: Array<{id: number, title: string, completed: boolean}>}}
  */
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
       return produce(state, (draf) => {

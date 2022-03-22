@@ -1,21 +1,5 @@
 {
-  "todos": [
-    {
-      "title": "todo 4",
-      "completed": false,
-      "id": 4
-    },
-    {
-      "title": "Todo 4",
-      "completed": false,
-      "id": 5
-    },
-    {
-      "title": "todo 5",
-      "completed": false,
-      "id": 6
-    }
-  ],
+  "todos": [],
   "counters": {
     "value": 10
   }

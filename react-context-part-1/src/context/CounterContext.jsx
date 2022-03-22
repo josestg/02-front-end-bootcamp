@@ -13,11 +13,11 @@ export const CounterContext = createContext({
 });
 
 // const initialState = { count: 0 };
-const initializer = (arg) => {
+export const initializer = (arg) => {
   return { count: arg.count };
 };
 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
   switch (action.type) {
     case INCREMENT:
       return { count: state.count + 1 };
@@ -28,7 +28,7 @@ const reducer = (state, action) => {
     case RESET:
       return initializer(initialState);
     default:
-      throw new Error("unknow action.type");
+      throw new Error("unknown action.type");
   }
 };
 
